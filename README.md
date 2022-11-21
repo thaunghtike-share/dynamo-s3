@@ -95,15 +95,15 @@ Mention the output S3 bucket we have created and the DynamoDB table.
 
 Schedule the pipeline job at 2AM everyday 
 
-![bucket](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/blob/main/images/Screen%20Shot%202022-11-21%20at%2021.08.02.png)
+![cron](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.08.02.png)
 
 Attach the data pipeline role and resource pipeline role.
 
-![bucket](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.11.29.png)
+![role](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.11.29.png)
 
 Here is the visual representation of the pipeline definition.
 
-![bucket](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.27.31.png)
+![visual](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.27.31.png)
 
 Once it reached 2:OOAM, the status changed to “Waiting for Runner” and job should bescheduled
 
