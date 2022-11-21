@@ -101,6 +101,37 @@ Attach the data pipeline role and resource pipeline role.
 
 ![role](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.11.29.png)
 
+The contents of the AmazonEC2RoleforDataPipelineRole is shown below. This is the managed policy attached to the default resource role for AWS Data Pipeline, DataPipelineDefaultResourceRole. When you define a resource role for your pipeline, we recommend that you begin with this permissions policy and then remove permissions for AWS service actions that are not required.
+
+Version 3 of the policy is shown, which is the most recent version at the time of this writing. View the most recent version of the policy using the IAM console.
+
+```bash
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:*",
+        "datapipeline:*",
+        "dynamodb:*",
+        "ec2:Describe*",
+        "elasticmapreduce:AddJobFlowSteps",
+        "elasticmapreduce:Describe*",
+        "elasticmapreduce:ListInstance*",
+        "elasticmapreduce:ModifyInstanceGroups",
+        "rds:Describe*",
+        "redshift:DescribeClusters",
+        "redshift:DescribeClusterSecurityGroups",
+        "s3:*",
+        "sdb:*",
+        "sns:*",
+        "sqs:*"
+      ],
+      "Resource": ["*"]
+    }]
+}
+```
+
 Here is the visual representation of the pipeline definition.
 
 ![visual](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.27.31.png)
