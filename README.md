@@ -1,14 +1,9 @@
 <h2>Prerequite</h2>
 
-```bash 
-Set these Action variables to run the github action.
-``` 
-<ui>
-<li>ACCESS_KEY</li>
-<li>ACCESS_KEY_SECRET</li>
-<li>AWS_REGION</li>
-</ui> 
-
+Run the stack
+```bash
+aws  cloudformation create-stack --stack-name test --template-body file://datapipeline.yaml --capabilities CAPABILITY_NAMED_IAM
+```
 ```bash
 You have to change unique bucket name here.
 
@@ -59,40 +54,6 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
-
-```
-
-```bash
-Github action is used to run this template file. Some Env Variables are required to run github actions.
-```
-
-```bash
-name: 'Deploy to AWS CloudFormation'
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code from master branch
-        uses: actions/checkout@v2
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Deploy to AWS CloudFormation
-        uses: aws-actions/aws-cloudformation-github-deploy@v1
-        with:
-          name: github
-          template: s3-dynamodb.yaml
-          no-fail-on-empty-changeset: "1"
 ```
 
 <h2>Data Pipeline Role Permissions Policy</h2>
