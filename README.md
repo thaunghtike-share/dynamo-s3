@@ -292,18 +292,6 @@ Here is the full IAM policies for data pipeline IAM role.
 
 ![iam](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.22.55.png)
 
-Here is the visual representation of the pipeline definition.
-
-![visual](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.27.31.png)
-
-Once it reached 2:OOAM, the status changed to “Waiting for Runner” and job should bescheduled
-
-![finish](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.11.51.png)
-
-Go to s3 bucket. You will see one exported folder.
-
-![s3](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.11.25.png)
-
 <h2> IAC for Data Pipeline </h2>
 
 This is full IAC template for Datapipeline.
@@ -435,4 +423,16 @@ Resources:
           - Key: "type"
             StringValue: "EmrCluster"
 ```
+
+Here is the visual representation of the pipeline definition.
+
+![visual](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.27.31.png)
+
+Once it reached 2:OOAM, the status changed to “Waiting for Runner” and job should bescheduled
+
+![finish](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.11.51.png)
+
+Go to s3 bucket. You will see one exported folder.
+
+![s3](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.11.25.png)
 
