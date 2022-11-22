@@ -1,3 +1,13 @@
+<h2>Prerequite</h2>
+ 
+Set these Action variables to run the github action.
+
+<ui>
+<li>ACCESS_KEY</li>
+<li>ACCESS_KEY_SECRET</li>
+<li>AWS_REGION</li>
+</ui>
+
 <h2>Run Cloudformation Stack</h2>
 
 I used this cloudformation template to create aws resources - DynamoDB and S3 bucket.
@@ -54,7 +64,6 @@ Outputs:
 
 ```bash
 Github action is used to run this template file. Some Env Variables are required to run github actions.
-Eg. ACCESS_KEY, ACCESS_KEY_SECRET, AWS_REGION
 ```
 
 ```bash
@@ -108,12 +117,12 @@ Attach the data pipeline role and resource pipeline role.
 
 The example policy that follows is scoped to allow essential functions that AWS Data Pipeline requires to run a pipeline with Amazon EC2 and Amazon EMR resources. It also provides permissions to access other AWS resources, such as Amazon Simple Storage Service and Amazon Simple Notification Service, that many pipelines require.
 
-<ur>
-  <lr>Replace 111122223333 with your AWS account ID</lr>
-  <lr>Replace NameOfDataPipelineRole with the name of pipeline role (the role to which this policy is attached).</lr>
-  </lr>Replace NameOfDataPipelineResourceRole with the name of EC2 instance role.</lr>
-  </lr>Replace us-west-1 with the appropriate Region for your application.</lr>
-</ur>  
+<ui>
+  <li>Replace 111122223333 with your AWS account ID</li>
+  <li>Replace NameOfDataPipelineRole with the name of pipeline role (the role to which this policy is attached).</li>
+  <li>Replace NameOfDataPipelineResourceRole with the name of EC2 instance role.</li>
+  <li>Replace us-west-1 with the appropriate Region for your application.</li>
+</ui>  
 
 ```bash
 {
