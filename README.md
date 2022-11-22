@@ -60,12 +60,6 @@ Resources:
 
 The example policy that follows is scoped to allow essential functions that AWS Data Pipeline requires to run a pipeline with Amazon EC2 and Amazon EMR resources. It also provides permissions to access other AWS resources, such as Amazon Simple Storage Service and Amazon Simple Notification Service, that many pipelines require.
 
-<ui>
-  <li>Replace 111122223333 with your AWS account ID</li>
-  <li>Replace NameOfDataPipelineRole with the name of pipeline role (the role to which this policy is attached).</li>
-  <li>Replace NameOfDataPipelineResourceRole with the name of EC2 instance role.</li>
-  <li>Replace us-west-1 with the appropriate Region for your application.</li>
-</ui>  
 
 ```bash
 MyTestRole:
