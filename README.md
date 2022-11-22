@@ -101,6 +101,169 @@ Attach the data pipeline role and resource pipeline role.
 
 ![role](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.11.29.png)
 
+<h2>Data Pipeline Role Permissions Policy</h2>
+
+The example policy that follows is scoped to allow essential functions that AWS Data Pipeline requires to run a pipeline with Amazon EC2 and Amazon EMR resources. It also provides permissions to access other AWS resources, such as Amazon Simple Storage Service and Amazon Simple Notification Service, that many pipelines require.
+
+<ur>
+  <lr>Replace 111122223333 with your AWS account ID</lr>
+  <lr>Replace NameOfDataPipelineRole with the name of pipeline role (the role to which this policy is attached).</lr>
+  </lr>Replace NameOfDataPipelineResourceRole with the name of EC2 instance role.</lr>
+  </lr>Replace us-west-1 with the appropriate Region for your application.</lr>
+</ur>  
+
+```bash
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetInstanceProfile",
+                "iam:GetRole",
+                "iam:GetRolePolicy",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListRolePolicies",
+                "iam:PassRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::111122223333:role/NameOfDataPipelineRole",
+                "arn:aws:iam::111122223333 :role/NameOfDataPipelineResourceRole"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CancelSpotInstanceRequests",
+                "ec2:CreateNetworkInterface",
+                "ec2:CreateSecurityGroup",
+                "ec2:CreateTags",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DeleteSecurityGroup",
+                "ec2:DeleteTags",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeAccountAttributes",
+                "ec2:DescribeDhcpOptions",
+                "ec2:DescribeImages",
+                "ec2:DescribeInstanceStatus",
+                "ec2:DescribeInstances",
+                "ec2:DescribeKeyPairs",
+                "ec2:DescribeLaunchTemplates",
+                "ec2:DescribeNetworkAcls",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribePrefixLists",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSpotInstanceRequests",
+                "ec2:DescribeSpotPriceHistory",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeTags",
+                "ec2:DescribeVpcAttribute",
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DescribeVpcEndpointServices",
+                "ec2:DescribeVpcs",
+                "ec2:DetachNetworkInterface",
+                "ec2:ModifyImageAttribute",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:RequestSpotInstances",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RunInstances",
+                "ec2:TerminateInstances",
+                "ec2:DescribeVolumeStatus",
+                "ec2:DescribeVolumes",
+                "elasticmapreduce:TerminateJobFlows",
+                "elasticmapreduce:ListSteps",
+                "elasticmapreduce:ListClusters",
+                "elasticmapreduce:RunJobFlow",
+                "elasticmapreduce:DescribeCluster",
+                "elasticmapreduce:AddTags",
+                "elasticmapreduce:RemoveTags",
+                "elasticmapreduce:ListInstanceGroups",
+                "elasticmapreduce:ModifyInstanceGroups",
+                "elasticmapreduce:GetCluster",
+                "elasticmapreduce:DescribeStep",
+                "elasticmapreduce:AddJobFlowSteps",
+                "elasticmapreduce:ListInstances",
+                "iam:ListInstanceProfiles",
+                "redshift:DescribeClusters"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sns:GetTopicAttributes",
+                "sns:Publish"
+            ],
+            "Resource": [
+                "arn:aws:sns:us-west-1:111122223333:MyFirstSNSTopic",
+                "arn:aws:sns:us-west-1:111122223333:MySecondSNSTopic",
+                "arn:aws:sns:us-west-1:111122223333:AnotherSNSTopic"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:ListMultipartUploads"
+            ],
+            "Resource": [
+              "arn:aws:s3:::MyStagingS3Bucket",
+              "arn:aws:s3:::MyLogsS3Bucket",
+              "arn:aws:s3:::MyInputS3Bucket",
+              "arn:aws:s3:::MyOutputS3Bucket",
+              "arn:aws:s3:::AnotherRequiredS3Buckets"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectMetadata",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::MyStagingS3Bucket/*",
+                "arn:aws:s3:::MyLogsS3Bucket/*",
+                "arn:aws:s3:::MyInputS3Bucket/*",
+                "arn:aws:s3:::MyOutputS3Bucket/*",
+                "arn:aws:s3:::AnotherRequiredS3Buckets/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:Scan",
+                "dynamodb:DescribeTable"
+            ],
+            "Resource": [
+                "arn:aws:dynamodb:us-west-1:111122223333:table/MyFirstDynamoDBTable",
+                "arn:aws:dynamodb:us-west-1:111122223333:table/MySecondDynamoDBTable",
+                "arn:aws:dynamodb:us-west-1:111122223333:table/AnotherDynamoDBTable"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rds:DescribeDBInstances"
+            ],
+            "Resource": [
+                "arn:aws:rds:us-west-1:111122223333:db:MyFirstRdsDb",
+                "arn:aws:rds:us-west-1:111122223333:db:MySecondRdsDb",
+                "arn:aws:rds:us-west-1:111122223333:db:AnotherRdsDb"
+            ]
+        }
+    ]
+}
+```
+Here is the full IAM policies for data pipeline IAM role.
+
+![s3](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.21.06.png)
+
 The contents of the AmazonEC2RoleforDataPipelineRole is shown below. This is the managed policy attached to the default resource role for AWS Data Pipeline, DataPipelineDefaultResourceRole. When you define a resource role for your pipeline, we recommend that you begin with this permissions policy and then remove permissions for AWS service actions that are not required.
 
 Version 3 of the policy is shown, which is the most recent version at the time of this writing. View the most recent version of the policy using the IAM console.
@@ -131,6 +294,10 @@ Version 3 of the policy is shown, which is the most recent version at the time o
     }]
 }
 ```
+
+Here is the full IAM policies for data pipeline IAM role.
+
+![iam](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.22.55.png)
 
 Here is the visual representation of the pipeline definition.
 
