@@ -52,7 +52,7 @@ Outputs:
 
 ```
 
-Github action is used to run this template file.
+Github action is used to run this template file. Some Env Variables are required to run github actions. Eg. ACCESS_KEY, ACCESS_KEY_SECRET, AWS_REGION
 
 ```bash
 name: 'Deploy to AWS CloudFormation'
