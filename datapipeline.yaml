@@ -1,8 +1,41 @@
-Description: 'A CloudFormation template which shows how to provide multiple values
-  to one StringValue when creating a DataPipeline definition, This template is entirely
-  based on the example provided in the DataPipeline documentation here: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-object-emrconfiguration.html
-  - Written by Nishant Casey'
+AWSTemplateFormatVersion: "2010-09-09"
+Description: 'A CloudFormation template which copy dynamodb to s3'  
+  
+Parameters:
+  BucketName: { Type: String, Default: "my-unique-bucket-111-test" }
+  HashKeyElementName:
+    Type: String
+    Default: EmployeeId
+    Description: Hash Key Name
+  HashKeyElementType:
+    Type: String
+    Default: S
+    Description: Hash Key Type
+    
 Resources:
+  MainBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: !Ref BucketName
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+  EmployeeTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Employee
+      AttributeDefinitions:
+        -
+          AttributeName: !Ref HashKeyElementName
+          AttributeType: !Ref HashKeyElementType
+      KeySchema:
+        -
+          AttributeName: !Ref HashKeyElementName
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
   DynamoDBInputS3OutputHive:
     Type: AWS::DataPipeline::Pipeline
     Properties:
