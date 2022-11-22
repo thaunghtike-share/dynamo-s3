@@ -107,152 +107,88 @@ The example policy that follows is scoped to allow essential functions that AWS 
 </ui>  
 
 ```bash
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "iam:GetInstanceProfile",
-                "iam:GetRole",
-                "iam:GetRolePolicy",
-                "iam:ListAttachedRolePolicies",
-                "iam:ListRolePolicies",
-                "iam:PassRole"
-            ],
-            "Resource": [
-                "arn:aws:iam::111122223333:role/NameOfDataPipelineRole",
-                "arn:aws:iam::111122223333 :role/NameOfDataPipelineResourceRole"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2:AuthorizeSecurityGroupEgress",
-                "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:CancelSpotInstanceRequests",
-                "ec2:CreateNetworkInterface",
-                "ec2:CreateSecurityGroup",
-                "ec2:CreateTags",
-                "ec2:DeleteNetworkInterface",
-                "ec2:DeleteSecurityGroup",
-                "ec2:DeleteTags",
-                "ec2:DescribeAvailabilityZones",
-                "ec2:DescribeAccountAttributes",
-                "ec2:DescribeDhcpOptions",
-                "ec2:DescribeImages",
-                "ec2:DescribeInstanceStatus",
-                "ec2:DescribeInstances",
-                "ec2:DescribeKeyPairs",
-                "ec2:DescribeLaunchTemplates",
-                "ec2:DescribeNetworkAcls",
-                "ec2:DescribeNetworkInterfaces",
-                "ec2:DescribePrefixLists",
-                "ec2:DescribeRouteTables",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSpotInstanceRequests",
-                "ec2:DescribeSpotPriceHistory",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeTags",
-                "ec2:DescribeVpcAttribute",
-                "ec2:DescribeVpcEndpoints",
-                "ec2:DescribeVpcEndpointServices",
-                "ec2:DescribeVpcs",
-                "ec2:DetachNetworkInterface",
-                "ec2:ModifyImageAttribute",
-                "ec2:ModifyInstanceAttribute",
-                "ec2:RequestSpotInstances",
-                "ec2:RevokeSecurityGroupEgress",
-                "ec2:RunInstances",
-                "ec2:TerminateInstances",
-                "ec2:DescribeVolumeStatus",
-                "ec2:DescribeVolumes",
-                "elasticmapreduce:TerminateJobFlows",
-                "elasticmapreduce:ListSteps",
-                "elasticmapreduce:ListClusters",
-                "elasticmapreduce:RunJobFlow",
-                "elasticmapreduce:DescribeCluster",
-                "elasticmapreduce:AddTags",
-                "elasticmapreduce:RemoveTags",
-                "elasticmapreduce:ListInstanceGroups",
-                "elasticmapreduce:ModifyInstanceGroups",
-                "elasticmapreduce:GetCluster",
-                "elasticmapreduce:DescribeStep",
-                "elasticmapreduce:AddJobFlowSteps",
-                "elasticmapreduce:ListInstances",
-                "iam:ListInstanceProfiles",
-                "redshift:DescribeClusters"
-            ],
-            "Resource": [
-                "*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "sns:GetTopicAttributes",
-                "sns:Publish"
-            ],
-            "Resource": [
-                "arn:aws:sns:us-west-1:111122223333:MyFirstSNSTopic",
-                "arn:aws:sns:us-west-1:111122223333:MySecondSNSTopic",
-                "arn:aws:sns:us-west-1:111122223333:AnotherSNSTopic"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:ListBucket",
-                "s3:ListMultipartUploads"
-            ],
-            "Resource": [
-              "arn:aws:s3:::MyStagingS3Bucket",
-              "arn:aws:s3:::MyLogsS3Bucket",
-              "arn:aws:s3:::MyInputS3Bucket",
-              "arn:aws:s3:::MyOutputS3Bucket",
-              "arn:aws:s3:::AnotherRequiredS3Buckets"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject",
-                "s3:GetObjectMetadata",
-                "s3:PutObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::MyStagingS3Bucket/*",
-                "arn:aws:s3:::MyLogsS3Bucket/*",
-                "arn:aws:s3:::MyInputS3Bucket/*",
-                "arn:aws:s3:::MyOutputS3Bucket/*",
-                "arn:aws:s3:::AnotherRequiredS3Buckets/*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "dynamodb:Scan",
-                "dynamodb:DescribeTable"
-            ],
-            "Resource": [
-                "arn:aws:dynamodb:us-west-1:111122223333:table/MyFirstDynamoDBTable",
-                "arn:aws:dynamodb:us-west-1:111122223333:table/MySecondDynamoDBTable",
-                "arn:aws:dynamodb:us-west-1:111122223333:table/AnotherDynamoDBTable"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "rds:DescribeDBInstances"
-            ],
-            "Resource": [
-                "arn:aws:rds:us-west-1:111122223333:db:MyFirstRdsDb",
-                "arn:aws:rds:us-west-1:111122223333:db:MySecondRdsDb",
-                "arn:aws:rds:us-west-1:111122223333:db:AnotherRdsDb"
-            ]
-        }
-    ]
-}
+MyTestRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - elasticmapreduce.amazonaws.com
+                - datapipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Description: Role to provide aws data pipeline
+      Policies:
+        - PolicyName: MyDataPipelineRolePolicy1
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:AuthorizeSecurityGroupEgress
+                  - ec2:AuthorizeSecurityGroupIngress
+                  - ec2:CancelSpotInstanceRequests
+                  - ec2:CreateNetworkInterface
+                  - ec2:CreateSecurityGroup
+                  - ec2:CreateTags
+                  - ec2:DeleteNetworkInterface
+                  - ec2:DeleteSecurityGroup
+                  - ec2:DeleteTags
+                  - ec2:DescribeAvailabilityZones
+                  - ec2:DescribeAccountAttributes
+                  - ec2:DescribeDhcpOptions
+                  - ec2:DescribeImages
+                  - ec2:DescribeInstanceStatus
+                  - ec2:DescribeInstances
+                  - ec2:DescribeKeyPairs
+                  - ec2:DescribeLaunchTemplates
+                  - ec2:DescribeNetworkAcls
+                  - ec2:DescribeNetworkInterfaces
+                  - ec2:DescribePrefixLists
+                  - ec2:DescribeRouteTables
+                  - ec2:DescribeSecurityGroups
+                  - ec2:DescribeSpotInstanceRequests
+                  - ec2:DescribeSpotPriceHistory
+                  - ec2:DescribeSubnets
+                  - ec2:DescribeTags
+                  - ec2:DescribeVpcAttribute
+                  - ec2:DescribeVpcEndpoints
+                  - ec2:DescribeVpcEndpointServices
+                  - ec2:DescribeVpcs
+                  - ec2:DetachNetworkInterface
+                  - ec2:ModifyImageAttribute
+                  - ec2:ModifyInstanceAttribute
+                  - ec2:RequestSpotInstances
+                  - ec2:RevokeSecurityGroupEgress
+                  - ec2:RunInstances
+                  - ec2:TerminateInstances
+                  - ec2:DescribeVolumeStatus
+                  - ec2:DescribeVolumes
+                  - elasticmapreduce:TerminateJobFlows
+                  - elasticmapreduce:ListSteps
+                  - elasticmapreduce:ListClusters
+                  - elasticmapreduce:RunJobFlow
+                  - elasticmapreduce:DescribeCluster
+                  - elasticmapreduce:AddTags
+                  - elasticmapreduce:RemoveTags
+                  - elasticmapreduce:ListInstanceGroups
+                  - elasticmapreduce:ModifyInstanceGroups
+                  - elasticmapreduce:*
+                  - elasticmapreduce:DescribeStep
+                  - elasticmapreduce:AddJobFlowSteps
+                  - elasticmapreduce:ListInstances
+                  - iam:ListInstanceProfiles
+                  - redshift:DescribeClusters
+                Resource:
+                  - "*"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/IAMFullAccess
+        - arn:aws:iam::aws:policy/AWSDataPipeline_PowerUser
+        - arn:aws:iam::aws:policy/AWSDataPipeline_FullAccess
+      RoleName: MyDataPipelineRole1
 ```
 Here is the full IAM policies for data pipeline IAM role.
 
