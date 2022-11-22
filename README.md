@@ -8,6 +8,13 @@ Set these Action variables to run the github action.
 <li>AWS_REGION</li>
 </ui>
 
+You have to change unique bucket name here.
+
+```bash
+https://github.com/thaunghtike-share/dynamo-s3/blob/main/datapipeline.yaml#L5
+https://github.com/thaunghtike-share/dynamo-s3/blob/main/datapipeline.yaml#L61
+```
+
 <h2>Run Cloudformation Stack</h2>
 
 I used this cloudformation template to create aws resources - DynamoDB and S3 bucket.
