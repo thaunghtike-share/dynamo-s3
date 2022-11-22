@@ -138,4 +138,12 @@ Here is the visual representation of the pipeline definition.
 
 Once it reached 2:OOAM, the status changed to “Waiting for Runner” and job should bescheduled
 
+![finish](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.11.51.png)
+
+Go to s3 bucket. You will see one exported folder.
+
+![s3](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-22%20at%2009.11.25.png)
+
+
+
 
