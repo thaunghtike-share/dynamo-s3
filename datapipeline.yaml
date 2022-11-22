@@ -263,7 +263,7 @@ Resources:
           - Key: "role"
             StringValue: "MyDataPipelineRole1"
           - Key: "resourceRole"
-            StringValue: "aws-elasticbeanstalk-ec2-role"
+            StringValue: "MyDataPipelineRoleResource1"
           - Key: "schedule"
             RefValue: "DefaultSchedule"
       - Id: "EmrClusterForBackup"
