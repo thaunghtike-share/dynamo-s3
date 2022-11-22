@@ -316,7 +316,7 @@ Go to s3 bucket. You will see one exported folder.
 
 <h2> IAC for Data Pipeline </h2>
 
-This is IAC for Datapipeline. But it doesn't support cron time parameters. So, if you want to create pipeline with IAC. First , run the formation stack. And then, edit start at date in " Edit In Architect".
+This is IAC template for Datapipeline.
 
 ```yaml
 Description: 'A CloudFormation template which shows how to provide multiple values
@@ -408,8 +408,8 @@ Resources:
         Fields:
           - Key: "occurrences"
             StringValue: "1"
-          - Key: "startAt"
-            StringValue: "FIRST_ACTIVATION_DATE_TIME"
+          - Key: "startDateTime" 
+            StringValue: "2023-11-21T02:00:00"
           - Key: "type"
             StringValue: "Schedule"
           - Key: "period"
