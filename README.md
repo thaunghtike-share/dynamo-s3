@@ -316,7 +316,7 @@ Go to s3 bucket. You will see one exported folder.
 
 <h2> IAC for Data Pipeline </h2>
 
-This is IAC template for Datapipeline.
+This is full IAC template for Datapipeline.
 
 ```yaml
 Description: 'A CloudFormation template which shows how to provide multiple values
