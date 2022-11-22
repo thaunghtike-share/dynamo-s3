@@ -59,14 +59,6 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
 
-Outputs:
-  MainBucketName:
-    Description: Name of the main bucket
-    Value: !Ref MainBucket
-  Employee:
-    Description: Table Created using this template.
-    Value: !Ref EmployeeTable
-
 ```
 
 ```bash
@@ -101,24 +93,6 @@ jobs:
           template: s3-dynamodb.yaml
           no-fail-on-empty-changeset: "1"
 ```
-
-<h2>Export Dynamodb To S3 </h2>
-
-Let us now visit our AWS Console and come to Data Pipeline service. Create a new pipeline. Choose export DynamoDB template from the drop down.
-
-![template](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.06.08.png)
-
-Mention the output S3 bucket we have created and the DynamoDB table.
-
-![bucket](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.06.45.png)
-
-Schedule the pipeline job at 2AM everyday 
-
-![cron](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.08.02.png)
-
-Attach the data pipeline role and resource pipeline role.
-
-![role](https://raw.githubusercontent.com/thaunghtike-share/dynamo-s3/main/images/Screen%20Shot%202022-11-21%20at%2021.11.29.png)
 
 <h2>Data Pipeline Role Permissions Policy</h2>
 
