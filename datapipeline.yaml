@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: 'A CloudFormation template which copy dynamodb to s3'  
-  
+Description: 'A CloudFormation template which copy dynamodb to s3'
+
 Parameters:
   BucketName: { Type: String, Default: "my-unique-bucket-interview-demo-123" }
   HashKeyElementName:
@@ -11,7 +11,7 @@ Parameters:
     Type: String
     Default: S
     Description: Hash Key Type
-    
+
 Resources:
   DataPipelineRole:
     Type: AWS::IAM::Role
@@ -137,7 +137,7 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/IAMFullAccess
         - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforDataPipelineRole
-      RoleName: MyDataPipelineRoleResource1    
+      RoleName: MyDataPipelineRoleResource1
   MainBucket:
     Type: "AWS::S3::Bucket"
     Properties:
@@ -163,6 +163,7 @@ Resources:
         WriteCapacityUnits: 5
   DynamoDBInputS3OutputHive:
     Type: AWS::DataPipeline::Pipeline
+    DependsOn: ["DataPipelineRole","DataPipelineResourceRole","MainBucket","EmployeeTable"]
     Properties:
       Name: DynamoDBInputS3OutputHive
       Description: Pipeline to backup DynamoDB data to S3
@@ -245,7 +246,7 @@ Resources:
         Fields:
           - Key: "occurrences"
             StringValue: "1"
-          - Key: "startDateTime" 
+          - Key: "startDateTime"
             StringValue: "2023-11-21T02:00:00"
           - Key: "type"
             StringValue: "Schedule"
