@@ -8,6 +8,7 @@ Set these Action variables to run the github action.
 <li>AWS_REGION</li>
 </ui>
 
+
 You have to change unique bucket name here.
 
 ```bash
