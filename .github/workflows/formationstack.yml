@@ -22,5 +22,5 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: datapipeline
-          template: s3-dynamodb.yaml
+          template: datapipeline.yaml
           no-fail-on-empty-changeset: "1"
